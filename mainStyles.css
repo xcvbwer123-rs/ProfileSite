@@ -1,3 +1,4 @@
+/* Default Styles */
 html {
   height: 100%;
   width: 100%;
@@ -21,6 +22,12 @@ body {
   align-items: center;
 }
 
+div {
+  font-family: 'Dongle', sans-serif;
+  color: white;
+}
+
+/* UI Styles */
 .contents {
   margin: auto;
   width: 430px;
@@ -30,22 +37,6 @@ body {
   align-items: center;
   flex-direction: column;
   animation: 0.4s linear 0s 1 unbluring;
-}
-
-.online {
-  background-color: #3BA55C;
-}
-
-.offline {
-  background-color: #747F8D;
-}
-
-.idle {
-  background-color: #FAA61A;
-}
-
-.dnd {
-  background-color: #ED4245;
 }
 
 .ui {
@@ -65,20 +56,52 @@ body {
   border-top-right-radius: 10px;
 }
 
-.avatar-holder {
-  display: flex;
-  justify-content: end;
-  align-items: end;
-}
-
-.centerText {
+.center-text {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.bold {
-  font-weight: bold;
+.message-show {
+  top: calc(100% - 72px);
+}
+
+.message-comeout {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  pointer-events: none;
+  overflow-y: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Message Styles */
+.message-hide {
+  top: calc(100% + 40px);
+}
+
+.message-frame {
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 12px;
+  width: fit-content;
+  max-width: 460px;
+  font-size: 25px;
+  height: 55px;
+  position: absolute;
+  transition: ease top 300ms;
+}
+
+/* Discord User Styles */
+
+.avatar-holder {
+  display: flex;
+  justify-content: end;
+  align-items: end;
 }
 
 .avatar-img {
@@ -99,89 +122,18 @@ body {
   border-radius: 100%;
 }
 
-div {
-  font-family: 'Dongle', sans-serif;
-  color: white;
+.online {
+  background-color: #3BA55C;
 }
 
-.links {
-  width: 100%;
-  background-color: rgb(0 0 0 / 30%);
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+.offline {
+  background-color: #747F8D;
 }
 
-.link-btn {
-  width: 90%;
-  height: fit-content;
-  margin: 5px 5px 5px 5px;
-  border-radius: 10px;
-  background-color: rgb(80, 80, 255);
+.idle {
+  background-color: #FAA61A;
 }
 
-.btn {
-  color: #fff;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 45px;
-  position: relative;
-  text-decoration: none;
-  text-transform: uppercase;
-  margin: 5px 5px 5px 5px;
-}
-
-.btn:hover {
-  text-decoration: none;
-}
-
-.btn-5 {
-  border: 0 solid;
-  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
-  outline: 1px solid;
-  outline-color: rgba(255, 255, 255, .5);
-  outline-offset: 0px;
-  text-shadow: none;
-  transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-.btn-5:hover {
-  border: 1px solid;
-  box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
-  outline-color: rgba(255, 255, 255, 0);
-  outline-offset: 15px;
-  text-shadow: 1px 1px 2px #427388;
-}
-
-.message-show {
-  top: calc(100% - 72px);
-}
-
-.message-comeout {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  pointer-events: none;
-  overflow-y: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.message-hide {
-  top: calc(100% + 40px);
-}
-
-.message-frame {
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0px 12px;
-  width: fit-content;
-  max-width: 460px;
-  font-size: 25px;
-  height: 55px;
-  position: absolute;
-  transition: ease top 300ms;
+.dnd {
+  background-color: #ED4245;
 }

@@ -1,15 +1,37 @@
 // Variables
-let ownerId = "872087832628441088";
+const ownerId = "872087832628441088";
+const reloadInterval = 30;
+
+let currectLang = "kr";
+
+let lastData = {
+  lastAvatar: "",
+  lastStatus: "",
+  lastDecoration: "",
+};
+
+let texts = {
+  "en": {
+    "title_text": "XC's Profile!",
+    "profile-loading": "Loading...",
+  },
+
+  "kr": {
+    "title_text": "XC의 프로필!",
+    "profile-loading": "로딩중...",
+  },
+};
 
 // Functions
 function onImageLoaded(){
   $("#profile-loading").css("display", "none");
-}
+};
 
 function loadDiscordStatus(){
   $.ajax({
     url: "https://api.lanyard.rest/v1/users/" + ownerId,
     type: "GET",
+
     success: function(res) {
       let data = res.data;
       let user_data = data.discord_user;
@@ -17,20 +39,44 @@ function loadDiscordStatus(){
       let decoration_img = decoration_data != null ? "https://cdn.discordapp.com/avatar-decoration-presets/{0}.png".format(decoration_data.asset) : null
       let avatar_img = "https://cdn.discordapp.com/avatars/" + ownerId + "/" + user_data.avatar + "?size=256";
 
-      $("#avatar-img").attr("src", avatar_img)
-      $("#discord-status").attr("class", $("#discord-status").attr("class") + " " + data.discord_status)
+      if(lastData.lastAvatar != avatar_img) $("#avatar-img").attr("src", avatar_img);
+      if(lastData.lastStatus != data.discord_status) $("#discord-status").attr("class", data.discord_status);
 
       if(decoration_img != null){
-        $("#avatar-deco").css("display", "block")
-        $("#avatar-deco").attr("src", decoration_img)
+        if(decoration_img != lastData.lastDecoration){
+          $("#avatar-deco").css("display", "block");
+          $("#avatar-deco").attr("src", decoration_img);
+        }
       }else{
-        $("#avatar-deco").css("display", "none")
+        $("#avatar-deco").css("display", "none");
       }
 
-      $("#user-name").text("{0}\n(@{1})".format(user_data.display_name, user_data.username))
+      $("#user-name").text("{0}\n(@{1})".format(user_data.display_name, user_data.username));
+
+      lastData.lastAvatar = avatar_img;
+      lastData.lastDecoration = decoration_img;
+      lastData.lastStatus = data.discord_status;
     }
   });
-}
+};
+
+function reloadTexts(){
+  let langList = texts[currectLang];
+
+  $.each(langList, (index, value) => {
+    $("#{0}".format(index)).text(value)
+  })
+};
+
+function changeLang(){
+  if(currectLang == "kr"){
+    currectLang = "en";
+  }else{
+    currectLang = "kr";
+  }
+
+  reloadTexts()
+};
 
 String.prototype.format = function() {
   let formatted = this;
@@ -77,7 +123,9 @@ String.prototype.format = function() {
 
 // Initialize
 $(document).ready(() => {
-  $("#avatar-img").on("load", onImageLoaded)
+  $("#avatar-img").on("load", onImageLoaded);
 
-  loadDiscordStatus()
+  reloadTexts();
+  loadDiscordStatus();
+  setInterval(loadDiscordStatus, reloadInterval * 1000);
 })

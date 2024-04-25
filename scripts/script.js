@@ -1,5 +1,5 @@
 // Variables
-import langSettings from "./lang.json" assert {type:"json"};
+import langSettings from "../settings/lang.json" assert {type:"json"};
 
 const ownerId = "872087832628441088";
 const reloadInterval = 10;

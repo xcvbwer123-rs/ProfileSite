@@ -70,6 +70,16 @@ div {
   font-weight: bold;
 }
 
+#description{
+  width: 95%;
+  margin-top: 10px;
+  font-size: 25px;
+  white-space:pre-wrap;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
 .message-show {
   top: calc(100% - 72px);
 }
@@ -155,6 +165,20 @@ div {
   border-radius: 100%;
   left: 65%;
   top: 65%;
+}
+
+#status-info{
+  white-space: initial;
+  width: max-content;
+  height: fit-content;
+  opacity: 0;
+  transform: translateX(27px);
+  transition: ease-in-out opacity 200ms;
+  padding: 0px 10px 0px 10px;
+}
+
+.status-hover{
+  opacity: 1 !important;
 }
 
 .online {

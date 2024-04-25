@@ -1,24 +1,37 @@
 // Variables
 const ownerId = "872087832628441088";
-const reloadInterval = 30;
+const reloadInterval = 10;
 
-let currectLang = "kr";
+const activeDevices = ["_web", "_desktop", "_mobile"];
+
+let currectLang = "en";
 
 let lastData = {
   lastAvatar: "",
   lastStatus: "",
   lastDecoration: "",
+  lastDevice: "_offline",
 };
 
 let texts = {
   "en": {
     "title_text": "XC's Profile!",
     "profile-loading": "Loading...",
+    "description": "a\nb",
+    "_web": "Web",
+    "_desktop": "Desktop",
+    "_mobile": "Mobile",
+    "_offline": "Offline",
   },
 
   "kr": {
     "title_text": "XC의 프로필!",
     "profile-loading": "로딩중...",
+    "description": "테스트1\n테스트2",
+    "_web": "웹",
+    "_desktop": "PC",
+    "_mobile": "모바일",
+    "_offline": "오프라인",
   },
 };
 
@@ -37,7 +50,7 @@ function loadDiscordStatus(){
       let user_data = data.discord_user;
       let decoration_data = user_data.avatar_decoration_data;
       let decoration_img = decoration_data != null ? "https://cdn.discordapp.com/avatar-decoration-presets/{0}.png".format(decoration_data.asset) : null
-      let avatar_img = "https://cdn.discordapp.com/avatars/" + ownerId + "/" + user_data.avatar + "?size=256";
+      let avatar_img = "https://cdn.discordapp.com/avatars/{0}/{1}?size=256".format(ownerId, user_data.avatar);
 
       if(lastData.lastAvatar != avatar_img) $("#avatar-img").attr("src", avatar_img);
       if(lastData.lastStatus != data.discord_status) $("#discord-status").attr("class", data.discord_status);
@@ -56,8 +69,29 @@ function loadDiscordStatus(){
       lastData.lastAvatar = avatar_img;
       lastData.lastDecoration = decoration_img;
       lastData.lastStatus = data.discord_status;
+      
+      let deviceFound = false;
+
+      for(let device in activeDevices){
+        if(data["active_on_discord{}".format(device)]){
+          lastData.lastDevice = device;
+          deviceFound = true;
+          break;
+        }
+      }
+
+      if(!deviceFound) lastData.lastDevice = "_offline";
     }
   });
+};
+
+function showDiscordStatusMessage(){
+  $("#status-info").text(texts[currectLang][lastData.lastDevice]);
+  $("#status-info").addClass("status-hover");
+};
+
+function hideDiscordStatusMessage(){
+  $("#status-info").removeClass("status-hover");
 };
 
 function reloadTexts(){
@@ -65,7 +99,7 @@ function reloadTexts(){
 
   $.each(langList, (index, value) => {
     $("#{0}".format(index)).text(value)
-  })
+  });
 };
 
 function changeLang(){
@@ -75,7 +109,7 @@ function changeLang(){
     currectLang = "kr";
   }
 
-  reloadTexts()
+  reloadTexts();
 };
 
 String.prototype.format = function() {
@@ -124,6 +158,8 @@ String.prototype.format = function() {
 // Initialize
 $(document).ready(() => {
   $("#avatar-img").on("load", onImageLoaded);
+
+  $("#discord-status").hover(showDiscordStatusMessage, hideDiscordStatusMessage);
 
   reloadTexts();
   loadDiscordStatus();

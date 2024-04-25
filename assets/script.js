@@ -1,7 +1,8 @@
 // Variables
+import langSettings from "./assets/lang.json" assert {type:"json"};
+
 const ownerId = "872087832628441088";
 const reloadInterval = 10;
-
 const activeDevices = ["_web", "_desktop", "_mobile"];
 
 let currectLang = "en";
@@ -11,28 +12,6 @@ let lastData = {
   lastStatus: "",
   lastDecoration: "",
   lastDevice: "_offline",
-};
-
-let texts = {
-  "en": {
-    "title_text": "XC's Profile!",
-    "profile-loading": "Loading...",
-    "description": "a\nb",
-    "_web": "Web",
-    "_desktop": "Desktop",
-    "_mobile": "Mobile",
-    "_offline": "Offline",
-  },
-
-  "kr": {
-    "title_text": "XC의 프로필!",
-    "profile-loading": "로딩중...",
-    "description": "테스트1\n테스트2",
-    "_web": "웹",
-    "_desktop": "PC",
-    "_mobile": "모바일",
-    "_offline": "오프라인",
-  },
 };
 
 // Functions
@@ -86,7 +65,7 @@ function loadDiscordStatus(){
 };
 
 function showDiscordStatusMessage(){
-  $("#status-info").text(texts[currectLang][lastData.lastDevice]);
+  $("#status-info").text("{0} | {1}".format(langSettings.device_texts[currectLang][lastData.lastDevice], langSettings.status_texts[currectLang][lastData.lastStatus]));
   $("#status-info").addClass("status-hover");
 };
 
@@ -95,7 +74,7 @@ function hideDiscordStatusMessage(){
 };
 
 function reloadTexts(){
-  let langList = texts[currectLang];
+  let langList = langSettings.ui_texts[currectLang];
 
   $.each(langList, (index, value) => {
     $("#{0}".format(index)).text(value)

@@ -1,0 +1,51 @@
+{
+    "ui_texts": {
+        "en": {
+            "title_text": "XC's Profile!",
+            "profile-loading": "Loading...",
+            "description": "a\nb",
+            "_web": "Web",
+            "_desktop": "Desktop",
+            "_mobile": "Mobile",
+            "_offline": "Offline"
+          },
+        
+          "kr": {
+            "title_text": "XC의 프로필!",
+            "profile-loading": "로딩중...",
+            "description": "테스트1\n테스트2"
+          }
+    },
+
+    "status_texts": {
+        "en": {
+            "online": "Can reply under 1 min",
+            "offline": "School or sleeping or etc",
+            "idle": "Can reply under 5 mins (almost watching youtube)",
+            "dnd": "Not in the mood to talk"
+        },
+
+        "kr": {
+            "online": "1분 내로 답장 가능",
+            "offline": "자는중 또는 학교 + 기타",
+            "idle": "5분 내로 답장 가능 (대부분 유튜브 보고있음)",
+            "dnd": "예기할 기분 아님"
+        }
+    },
+
+    "device_texts": {
+        "en": {
+            "_web": "Web",
+            "_desktop": "Desktop",
+            "_mobile": "Mobile",
+            "_offline": "Offline"
+        },
+
+        "kr": {
+            "_web": "웹",
+            "_desktop": "PC",
+            "_mobile": "모바일",
+            "_offline": "오프라인"
+        }
+    }
+}

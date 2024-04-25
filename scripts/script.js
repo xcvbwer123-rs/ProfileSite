@@ -1,11 +1,13 @@
 // Variables
 import langSettings from "../settings/lang.json" assert {type:"json"};
+import settings from "../settings/settings.json" assert {type:"json"};
 
-const ownerId = "872087832628441088";
-const reloadInterval = 10;
+const ownerId = settings.ownerId;
+const reloadInterval = settings.reloadInterval;
 const activeDevices = ["_web", "_desktop", "_mobile"];
 
-let currectLang = "en";
+let langIndex = settings.supportedLangs.indexOf(navigator.language);
+let currectLang = langIndex >= 0 ? settings.supportedLangs[langIndex] : settings.defaultLang;
 
 let lastData = {
   lastAvatar: "",
@@ -82,11 +84,17 @@ function reloadTexts(){
 };
 
 function changeLang(){
-  if(currectLang == "kr"){
-    currectLang = "en";
-  }else{
-    currectLang = "kr";
+  if(langIndex == -1){
+    langIndex = settings.supportedLangs.indexOf(settings.defaultLang);
   }
+
+  langIndex += 1;
+
+  if(langIndex >= settings.supportedLangs.length){
+    langIndex = 0;
+  }
+
+  currectLang = settings.supportedLangs[langIndex];
 
   reloadTexts();
 };

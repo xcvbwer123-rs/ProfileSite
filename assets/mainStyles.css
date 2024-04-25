@@ -5,7 +5,7 @@ html {
 }
 
 body {
-  background-image: url('https://media.discordapp.net/attachments/1226125769823092807/1232343879400030280/b7b715190586b985db6b5c46997fc54c.jpg?ex=66291d2c&is=6627cbac&hm=8c21bba451ecedcd79566d24b834742a6ba3ff9f6453a059ce579c9a1938fea4&=&format=webp&width=1782&height=1002');
+  background-image: url('./background.png');
   background-repeat: no-repeat;
   background-color: #171717;
   background-position-x: center;

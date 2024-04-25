@@ -3,11 +3,7 @@
         "en": {
             "title_text": "XC's Profile!",
             "profile-loading": "Loading...",
-            "description": "a\nb",
-            "_web": "Web",
-            "_desktop": "Desktop",
-            "_mobile": "Mobile",
-            "_offline": "Offline"
+            "description": "a\nb"
           },
         
           "kr": {

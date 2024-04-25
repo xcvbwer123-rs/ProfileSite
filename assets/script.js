@@ -51,9 +51,9 @@ function loadDiscordStatus(){
       
       let deviceFound = false;
 
-      for(let device in activeDevices){
-        if(data["active_on_discord{}".format(device)]){
-          lastData.lastDevice = device;
+      for(let i in activeDevices){
+        if(data["active_on_discord{0}".format(activeDevices[i])]){
+          lastData.lastDevice = activeDevices[i];
           deviceFound = true;
           break;
         }

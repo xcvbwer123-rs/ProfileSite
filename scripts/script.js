@@ -145,7 +145,7 @@ String.prototype.format = function() {
 // Initialize
 $(document).ready(() => {
   $("#avatar-img").on("load", onImageLoaded);
-
+  $("#lang-button").click(changeLang);
   $("#discord-status").hover(showDiscordStatusMessage, hideDiscordStatusMessage);
 
   reloadTexts();

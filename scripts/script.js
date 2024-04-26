@@ -148,6 +148,10 @@ $(document).ready(() => {
   $("#lang-button").click(changeLang);
   $("#discord-status").hover(showDiscordStatusMessage, hideDiscordStatusMessage);
 
+  if(settings.supportedLangs.length <= 1){
+    $("#lang-button").css("display", "none");
+  }
+
   reloadTexts();
   loadDiscordStatus();
   setInterval(loadDiscordStatus, reloadInterval * 1000);

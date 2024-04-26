@@ -53,13 +53,16 @@ div {
   transition:
   border-color 1250ms cubic-bezier(0.19, 1, 0.22, 1),
   box-shadow 1250ms cubic-bezier(0.19, 1, 0.22, 1),
-  backdrop-filter 1250ms cubic-bezier(0.19, 1, 0.22, 1);
+  backdrop-filter 1250ms cubic-bezier(0.19, 1, 0.22, 1),
+  scale 200ms ease-in;
 }
 
 .button:hover {
   border-color: rgb(255, 255, 255);
   box-shadow: 0px 0px 32px -6px rgb(0 0 0), inset 0 0 20px rgba(255, 255, 255, 0.508);
   backdrop-filter: blur(20px);
+  cursor: pointer;
+  scale: 1.05;
 }
 
 /* UI Styles */

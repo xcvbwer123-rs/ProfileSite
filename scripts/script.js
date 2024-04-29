@@ -84,18 +84,29 @@ function reloadTexts(){
 };
 
 function changeLang(){
+  let nextLang = langIndex;
+
   if(langIndex == -1){
     langIndex = settings.supportedLangs.indexOf(settings.defaultLang);
+    nextLang = langIndex;
   }
 
   langIndex += 1;
+  nextLang += 1;
 
   if(langIndex >= settings.supportedLangs.length){
     langIndex = 0;
+    nextLang = 1;
+  }
+
+  if(nextLang == settings.supportedLangs.length){
+    nextLang = 0;
   }
 
   currectLang = settings.supportedLangs[langIndex];
 
+  $("#current-lang").text(langSettings.lang_text[settings.supportedLangs[nextLang]]);
+  
   reloadTexts();
 };
 

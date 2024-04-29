@@ -3,15 +3,13 @@
         "en-US": {
             "title_text": "XC's Profile!",
             "profile-loading": "Loading...",
-            "description": "a\nb",
-            "current-lang": "한국어"
+            "description": "a\nb"
           },
         
           "ko-KR": {
             "title_text": "XC의 프로필!",
             "profile-loading": "로딩중...",
-            "description": "테스트1\n테스트2",
-            "current-lang": "English (US)"
+            "description": "테스트1\n테스트2"
           }
     },
 
@@ -45,5 +43,10 @@
             "_mobile": "모바일",
             "_offline": "오프라인"
         }
+    },
+
+    "lang_texts": {
+        "en-US": "English (US)",
+        "ko-KR": "한국어"
     }
 }

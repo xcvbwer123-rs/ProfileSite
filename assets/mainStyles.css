@@ -198,6 +198,12 @@ div {
   border-radius: 100%;
   left: 65%;
   top: 65%;
+
+  transition: all ease 0.2s;
+}
+
+#discord-status:hover{
+  scale: 1.2;
 }
 
 #status-info{

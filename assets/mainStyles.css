@@ -65,6 +65,16 @@ div {
   scale: 1.05;
 }
 
+.info-texts{
+  width: 95%;
+  margin-top: 10px;
+  font-size: 25px;
+  white-space:pre-wrap;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
 /* UI Styles */
 #contents {
   margin: auto;
@@ -90,16 +100,6 @@ div {
   height: 100%;
   font-size: 25px;
   font-weight: bold;
-}
-
-#description{
-  width: 95%;
-  margin-top: 10px;
-  font-size: 25px;
-  white-space:pre-wrap;
-  display: flex;
-  justify-content: left;
-  align-items: center;
 }
 
 .message-show {

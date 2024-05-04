@@ -3,13 +3,15 @@
         "en-US": {
             "title_text": "XC's Profile!",
             "profile-loading": "Loading...",
-            "description": "a\nb"
+            "description": "",
+            "information": "- Name : {name}\n- BirthDay : {birthday} ({timeZone})\n- Age : {age} years old"
           },
         
           "ko-KR": {
             "title_text": "XC의 프로필!",
             "profile-loading": "로딩중...",
-            "description": "테스트1\n테스트2"
+            "description": "",
+            "information": "- 이름 : {name}\n- 생일 : {birthday} ({timeZone})\n- 나이 : {krAge}세 (만 {age}세)"
           }
     },
 

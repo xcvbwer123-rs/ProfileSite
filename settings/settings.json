@@ -2,5 +2,9 @@
     "ownerId": "872087832628441088",
     "reloadInterval": 10,
     "defaultLang": "en-US",
-    "supportedLangs": ["en-US", "ko-KR"]
+    "supportedLangs": ["en-US", "ko-KR"],
+    "birthTimestamp": 1220540400,
+    "profileName": "XC",
+    "timeZone": "Asia/Seoul",
+    "birthdayOptions": {"month": "long", "day": "numeric", "weekday": "long"}
 }

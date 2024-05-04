@@ -5,7 +5,8 @@ import settings from "../settings/settings.json" with {type:"json"};
 const ownerId = settings.ownerId;
 const reloadInterval = settings.reloadInterval;
 const activeDevices = ["_web", "_desktop", "_mobile"];
-const birthdayDate = settings.birthdayTimestamp != null ? new Date(settings.birthdayTimestamp * 1000) : null;
+const birthDate = new Date(settings.birthTimestamp * 1000);
+const currentDate = new Date();
 
 let langIndex = settings.supportedLangs.indexOf(navigator.language);
 let nextLang = langIndex;
@@ -22,6 +23,22 @@ let lastData = {
 function onImageLoaded(){
   $("#profile-loading").css("display", "none");
 };
+
+function getAge(isKoreanAge){
+  let age = currentDate.getFullYear() - birthDate.getFullYear();
+  
+  if(isKoreanAge){
+    age++;
+  }else{
+    let m = currentDate.getMonth() - birthDate.getMonth();
+
+    if (m < 0 || (m === 0 && currentDate.getDate() < birthDate.getDate())) {
+        age--;
+    }
+  }
+
+  return age;
+}
 
 function loadDiscordStatus(){
   $.ajax({
@@ -92,9 +109,16 @@ function changeLangBtnText(){
 
 function reloadTexts(){
   let langList = langSettings.ui_texts[currectLang];
+  let formatData = {
+    name: settings.profileName,
+    timeZone: settings.timeZone,
+    birthday: birthDate.toLocaleDateString(currectLang, settings.birthdayOptions),
+    age: getAge(),
+    krAge: getAge(true),
+  };
 
   $.each(langList, (index, value) => {
-    $("#{0}".format(index)).text(value)
+    $("#{0}".format(index)).text(value.format(formatData));
   });
 
   changeLangBtnText();
@@ -122,8 +146,14 @@ function changeLang(){
 String.prototype.format = function() {
   let formatted = this;
 
-  for(let arg in arguments) {
+  if(arguments.length == 1 && typeof(arguments[0]) == "object"){
+    for(let arg in arguments[0]) {
+      formatted = formatted.replace("{" + arg + "}", arguments[0][arg]);
+    }
+  }else{
+    for(let arg in arguments) {
       formatted = formatted.replace("{" + arg + "}", arguments[arg]);
+    }
   }
 
   return formatted;
@@ -171,6 +201,8 @@ $(document).ready(() => {
   if(settings.supportedLangs.length <= 1){
     $("#lang-button").css("display", "none");
   }
+
+  settings.birthdayOptions.timeZone = settings.timeZone
 
   reloadTexts();
   loadDiscordStatus();

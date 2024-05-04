@@ -3,14 +3,14 @@
         "en-US": {
             "title_text": "XC's Profile!",
             "profile-loading": "Loading...",
-            "description": "",
+            "description": "Hello, I'm XC who's working as a developer on roblox!\nRecently I've worked on games like Parking Lot Incident series, Jump Climbing and more.\n\nGames in development currently are : Sol's RNG and Tower Attack\nDeveloper in scripting",
             "information": "- Name : {name}\n- BirthDay : {birthday} ({timeZone})\n- Age : {age} years old"
           },
         
           "ko-KR": {
             "title_text": "XC의 프로필!",
             "profile-loading": "로딩중...",
-            "description": "",
+            "description": "로블록스에서 게임을 개발하고 있는 XC입니다!\n최근에 개발했던 게임은 주차장 사건 시리즈, 점프 클라이밍등이 있습니다.\n\n현재 개발중인 게임 : Sol's RNG, Tower Attack\n개발 분야 : 스크립팅",
             "information": "- 이름 : {name}\n- 생일 : {birthday} ({timeZone})\n- 나이 : {krAge}세 (만 {age}세)"
           }
     },

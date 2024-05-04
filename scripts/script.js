@@ -5,8 +5,10 @@ import settings from "../settings/settings.json" with {type:"json"};
 const ownerId = settings.ownerId;
 const reloadInterval = settings.reloadInterval;
 const activeDevices = ["_web", "_desktop", "_mobile"];
+const birthdayDate = settings.birthdayTimestamp != null ? new Date(settings.birthdayTimestamp * 1000) : null;
 
 let langIndex = settings.supportedLangs.indexOf(navigator.language);
+let nextLang = langIndex;
 let currectLang = langIndex >= 0 ? settings.supportedLangs[langIndex] : settings.defaultLang;
 
 let lastData = {
@@ -75,17 +77,30 @@ function hideDiscordStatusMessage(){
   $("#status-info").removeClass("status-hover");
 };
 
+function changeLangBtnText(){
+  if(langIndex >= settings.supportedLangs.length){
+    langIndex = 0;
+    nextLang = 1;
+  }
+
+  if(langIndex == settings.supportedLangs.length-1){
+    nextLang = 0;
+  }
+
+  $("#current-lang").text(langSettings.lang_texts[settings.supportedLangs[nextLang]]);
+}
+
 function reloadTexts(){
   let langList = langSettings.ui_texts[currectLang];
 
   $.each(langList, (index, value) => {
     $("#{0}".format(index)).text(value)
   });
+
+  changeLangBtnText();
 };
 
 function changeLang(){
-  let nextLang = langIndex;
-
   if(langIndex == -1){
     langIndex = settings.supportedLangs.indexOf(settings.defaultLang);
     nextLang = langIndex;
@@ -99,13 +114,7 @@ function changeLang(){
     nextLang = 1;
   }
 
-  if(nextLang == settings.supportedLangs.length){
-    nextLang = 0;
-  }
-
   currectLang = settings.supportedLangs[langIndex];
-
-  $("#current-lang").text(langSettings.lang_text[settings.supportedLangs[nextLang]]);
   
   reloadTexts();
 };

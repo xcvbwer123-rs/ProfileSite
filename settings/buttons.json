@@ -1,0 +1,13 @@
+[
+    [
+        {
+            "id": "kakaoProfile",
+            "link": "https://open.kakao.com/me/xcvbwer123",
+            "new_tab": true
+        },
+        {
+            "id": "email",
+            "copy_text": "xcvbwer123@gmail.com"
+        }
+    ]
+]

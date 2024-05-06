@@ -1,6 +1,7 @@
 // Variables
-import langSettings from "../settings/lang.json" with {type:"json"};
-import settings from "../settings/settings.json" with {type:"json"};
+import langSettings from "../settings/lang.json" with {type: "json"};
+import settings from "../settings/settings.json" with {type: "json"};
+import buttons from "../settings/buttons.json" with {type: "json"};
 
 const ownerId = settings.ownerId;
 const reloadInterval = settings.reloadInterval;
@@ -107,6 +108,14 @@ function changeLangBtnText(){
   $("#current-lang").text(langSettings.lang_texts[settings.supportedLangs[nextLang]]);
 }
 
+function reloadButtonTexts(){
+  $.each(document.querySelectorAll(".bottom-btn"), (_, dom) => {
+    let button = $(dom);
+
+    button.text(langSettings.button_texts[button.attr("id").replace("btn_", "")][currectLang])
+  });
+}
+
 function reloadTexts(){
   let langList = langSettings.ui_texts[currectLang];
   let formatData = {
@@ -121,6 +130,7 @@ function reloadTexts(){
     $("#{0}".format(index)).text(value.format(formatData));
   });
 
+  reloadButtonTexts();
   changeLangBtnText();
 };
 
@@ -142,6 +152,35 @@ function changeLang(){
   
   reloadTexts();
 };
+
+function copyText(text){
+  navigator.clipboard.writeText(text);
+}
+
+function createButtons(){
+  $.each(buttons, (index, line) => {
+    $("#button-holder").append(`<div id="line{0}" class="row button-row"></div>`.format(index));
+
+    $.each(line, (_, button) => {
+      $("#line{0}".format(index)).append(`<div id="btn_{0}" class="button bottom-btn col center-text">button</div>`.format(button.id));
+
+      let created = $("#btn_{0}".format(button.id));
+      if(button.link){
+        created.click(() => {
+          if(button.new_tab){
+            window.open(button.link, '_blank').focus();
+          }else{
+            location.href = button.link;
+          }
+        });
+      }else if(button.copy_text){
+        created.click(() => {
+          copyText(button.copy_text);
+        });
+      }
+    });
+  });
+}
 
 String.prototype.format = function() {
   let formatted = this;
@@ -204,6 +243,7 @@ $(document).ready(() => {
 
   settings.birthdayOptions.timeZone = settings.timeZone
 
+  createButtons();
   reloadTexts();
   loadDiscordStatus();
   setInterval(loadDiscordStatus, reloadInterval * 1000);

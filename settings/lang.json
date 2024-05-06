@@ -50,5 +50,17 @@
     "lang_texts": {
         "en-US": "English (US)",
         "ko-KR": "한국어"
+    },
+
+    "button_texts": {
+        "kakaoProfile": {
+            "en-US": "Kakao Open Profile",
+            "ko-KR": "카톡 오픈프로필"
+        },
+
+        "email": {
+            "en-US": "Email",
+            "ko-KR": "이메일"
+        }
     }
 }

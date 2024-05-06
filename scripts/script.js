@@ -39,7 +39,7 @@ function getAge(isKoreanAge){
   }
 
   return age;
-}
+};
 
 function loadDiscordStatus(){
   $.ajax({
@@ -106,7 +106,7 @@ function changeLangBtnText(){
   }
 
   $("#current-lang").text(langSettings.lang_texts[settings.supportedLangs[nextLang]]);
-}
+};
 
 function reloadButtonTexts(){
   $.each(document.querySelectorAll(".bottom-btn"), (_, dom) => {
@@ -114,7 +114,7 @@ function reloadButtonTexts(){
 
     button.text(langSettings.button_texts[button.attr("id").replace("btn_", "")][currectLang])
   });
-}
+};
 
 function reloadTexts(){
   let langList = langSettings.ui_texts[currectLang];
@@ -153,9 +153,40 @@ function changeLang(){
   reloadTexts();
 };
 
+function uuidv4() {
+  return "10000000-1000-4000-8000-100000000000".replace(/[018]/g, c =>
+    (+c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> +c / 4).toString(16)
+  );
+};
+
+function removeMessage(message){
+  message.addClass("hide");
+  if (message[0].timeoutId) clearTimeout(message[0].timeoutId);
+  setTimeout(() => message.remove(), 500);
+};
+
+function createMessage(text, icon){
+  let uuid = uuidv4();
+
+  $("#message-holder").append(`
+  <li class="toast ${uuid} button">
+    <div class="column">
+      <i class="fa-solid ${icon || "fa-circle-check"}"></i>
+      <span>${text}</span>
+    </div>
+  </li>
+  `);
+
+  let message = $(`.${uuid}`);
+  message[0].timeoutId = setTimeout(() => removeMessage(message), 5000);
+  message.click(() => removeMessage(message));
+};
+
 function copyText(text){
   navigator.clipboard.writeText(text);
-}
+
+  createMessage(langSettings.notifications.copied[currectLang]);
+};
 
 function createButtons(){
   $.each(buttons, (index, line) => {
@@ -179,8 +210,12 @@ function createButtons(){
         });
       }
     });
+
+    if(index == buttons.length-1){
+      $("#line{0}".format(index)).addClass("last-row");
+    }
   });
-}
+};
 
 String.prototype.format = function() {
   let formatted = this;

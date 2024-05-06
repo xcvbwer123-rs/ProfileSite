@@ -61,6 +61,18 @@
         "email": {
             "en-US": "Email",
             "ko-KR": "이메일"
+        },
+
+        "solsRNG":{
+            "en-US": "Sol's RNG Discord",
+            "ko-KR": "Sol's RNG 디스코드"
+        }
+    },
+
+    "notifications": {
+        "copied": {
+            "en-US": "Copied to clipboard.",
+            "ko-KR": "클립보드에 복사되었습니다."
         }
     }
 }

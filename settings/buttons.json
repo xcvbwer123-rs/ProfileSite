@@ -9,5 +9,12 @@
             "id": "email",
             "copy_text": "xcvbwer123@gmail.com"
         }
+    ],
+    [
+        {
+            "id": "solsRNG",
+            "link": "https://discord.gg/solsrng",
+            "new_tab": true
+        }
     ]
 ]

@@ -1,7 +1,7 @@
 // Variables
-import langSettings from "../settings/lang.json" assert {type: "json"};
-import settings from "../settings/settings.json" assert {type: "json"};
-import buttons from "../settings/buttons.json" assert {type: "json"};
+import langSettings from "../settings/lang.json" with {type: "json"};
+import settings from "../settings/settings.json" with {type: "json"};
+import buttons from "../settings/buttons.json" with {type: "json"};
 
 const ownerId = settings.ownerId;
 const reloadInterval = settings.reloadInterval;

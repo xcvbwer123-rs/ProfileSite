@@ -1,7 +1,13 @@
 // Variables
-import langSettings from "../settings/lang.json" with {type: "json"};
-import settings from "../settings/settings.json" with {type: "json"};
-import buttons from "../settings/buttons.json" with {type: "json"};
+// import langSettings from "../settings/lang.json" //with {type: "json"};
+// import settings from "../settings/settings.json" //with {type: "json"};
+// import buttons from "../settings/buttons.json" //with {type: "json"};
+
+let langSettings;
+let settings;
+let buttons;
+
+importSettings();
 
 const ownerId = settings.ownerId;
 const reloadInterval = settings.reloadInterval;
@@ -216,6 +222,65 @@ function createButtons(){
     }
   });
 };
+
+function importLang(){
+  return new Promise((resolve, reject) => {
+    $.ajax({
+      url: "../settings/lang.json",
+      method: "GET",
+      async: false,
+      success: function(response){
+        langSettings = response;
+        resolve(response);
+      },
+      error: function(error){
+        importLang()
+      }
+    })
+  });
+}
+
+function importPageSettings(){
+  return new Promise((resolve, reject) => {
+    $.ajax({
+      url: "../settings/settings.json",
+      method: "GET",
+      async: false,
+      success: function(response){
+        settings = response;
+        resolve(response);
+      },
+      error: function(error){
+        importPageSettings()
+      }
+    })
+  });
+}
+
+function importButtons(){
+  return new Promise((resolve, reject) => {
+    $.ajax({
+      url: "../settings/buttons.json",
+      method: "GET",
+      async: false,
+      success: function(response){
+        buttons = response;
+        resolve(response);
+      },
+      error: function(error){
+        importButtons()
+      }
+    })
+  });
+}
+
+async function importSettings() {
+  return await Promise.all([
+    importLang(),
+    importPageSettings(),
+    importButtons(),
+  ]);
+}
 
 String.prototype.format = function() {
   let formatted = this;

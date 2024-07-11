@@ -6,6 +6,7 @@
 let langSettings;
 let settings;
 let buttons;
+let url = location.href;
 
 importSettings();
 
@@ -226,7 +227,7 @@ function createButtons(){
 function importLang(){
   return new Promise((resolve, reject) => {
     $.ajax({
-      url: "/settings/lang.json",
+      url: url+"/settings/lang.json",
       method: "GET",
       async: false,
       success: function(response){
@@ -243,7 +244,7 @@ function importLang(){
 function importPageSettings(){
   return new Promise((resolve, reject) => {
     $.ajax({
-      url: "/settings/settings.json",
+      url: url+"/settings/settings.json",
       method: "GET",
       async: false,
       success: function(response){
@@ -260,7 +261,7 @@ function importPageSettings(){
 function importButtons(){
   return new Promise((resolve, reject) => {
     $.ajax({
-      url: "/settings/buttons.json",
+      url: url+"/settings/buttons.json",
       method: "GET",
       async: false,
       success: function(response){
